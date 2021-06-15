@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Members from './FormList';
+
 
 
 
@@ -15,31 +15,33 @@ export default function TeamForm() {
         setMember({
             ...member, [e.target.name]: e.target.value
         })
+
     }
 
-    const onSubmit = evt => {
-        evt.preventDefault()
-        console.log(member)
-    }
+
     const [memberList, setMemberList] = useState([])
 
-    const addMember = () => {
+    const addMember = (e) => {
+
+    }
+    const onSubmit = evt => {
+        evt.preventDefault()
         setMemberList([...memberList, {
             id: memberList.length,
             name: member.name,
             email: member.email,
             role: member.role
-
         }])
-
+        
     }
+console.log(memberList) 
 
 
     return (
         <>
-            <form id='team-form' onSubmit={addMember}>
+            <form id='#team-form' onSubmit={onSubmit}>
                 <label>Name
-            <input
+                   <input
                         value={member.name}
                         onChange={onChange}
                         name='name'
@@ -47,7 +49,7 @@ export default function TeamForm() {
                     />
                 </label>
                 <label>Email
-                <input
+                    <input
                         value={member.email}
                         onChange={onChange}
                         name='email'
@@ -55,7 +57,7 @@ export default function TeamForm() {
                     />
                 </label>
                 <label>Role
-                <select
+                    <select
                         value={member.role}
                         onChange={onChange}
                         name='role'>
@@ -65,13 +67,15 @@ export default function TeamForm() {
                         <option value='designer'>designer</option>
                     </select>
                 </label>
-                <br />
-                <button type='submit'>Submit</button>
+                <div className='submit'>
+                <button>Submit</button>
+                </div> 
+                <button>Add Member</button>
             </form>
-            <button onClick={addMember}>Add Member</button>
+           
             <ul>
                 {memberList.map(member => (
-                    <li key={member.id}>{memberList}</li>
+                    <li key={member.id}>{member.name}</li>
                 ))}
             </ul>
         </>
